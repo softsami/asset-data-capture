@@ -21,7 +21,7 @@
 
     <!-- Asset Data Capture Form -->
     <div id="formPage" class="bg-white shadow-md rounded px-8 pt-6 pb-8 hidden">
-      <h2 class="text-xl font-bold mb-4">Asset Data Forms</h2>
+      <h2 class="text-xl font-bold mb-4">Asset Data Form</h2>
       <input id="assetId" type="text" placeholder="Asset ID (unique)" class="shadow border rounded w-full py-2 px-3 mb-3">
 
       <label for="ibc">IBC:</label>
@@ -50,63 +50,5 @@
       <button onclick="submitData()" class="bg-green-500 text-white py-2 px-4 rounded">Submit</button>
     </div>
   </div>
-
-  <script>
-    const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbw76vQxKwtnRyW6tP3eEthOEnGXz7P16X36sF6OxYCnqCOXAbdlnpZdIeWhtPOFdJs/exec'; // Replace with actual URL
-    const credentials = { username: "admin", password: "123" };
-    let currentUser = "";
-
-    function login() {
-      const user = document.getElementById("username").value;
-      const pass = document.getElementById("password").value;
-      if (user === credentials.username && pass === credentials.password) {
-        currentUser = user;
-        document.getElementById("loginPage").classList.add("hidden");
-        document.getElementById("formPage").classList.remove("hidden");
-      } else {
-        document.getElementById("loginError").classList.remove("hidden");
-      }
-    }
-
-    document.getElementById("ibc").addEventListener("change", function() {
-      document.getElementById("otherIbc").classList.toggle("hidden", this.value !== "Other");
-    });
-
-    document.getElementById("assetType").addEventListener("change", function() {
-      document.getElementById("otherAssetType").classList.toggle("hidden", this.value !== "Other");
-    });
-
-  function submitData() {
-  const assetId = document.getElementById("assetId").value;
-  const ibc = document.getElementById("ibc").value === "Other" ? document.getElementById("otherIbc").value : document.getElementById("ibc").value;
-  const assetType = document.getElementById("assetType").value === "Other" ? document.getElementById("otherAssetType").value : document.getElementById("assetType").value;
-  const date = document.getElementById("date").value;
-  const postedBy = currentUser;
-
-  const formData = new URLSearchParams();
-  formData.append("assetId", assetId);
-  formData.append("ibc", ibc);
-  formData.append("assetType", assetType);
-  formData.append("date", date);
-  formData.append("postedBy", postedBy);
-
-  fetch(SHEET_API_URL, {
-    method: "POST",
-    body: formData,
-  })
-  .then(res => res.text())
-  .then(data => {
-    alert("✅ Data submitted successfully!");
-    // Reset form
-    document.getElementById("assetId").value = "";
-    document.getElementById("ibc").value = "";
-    document.getElementById("otherIbc").value = "";
-    document.getElementById("assetType").value = "";
-    document.getElementById("otherAssetType").value = "";
-    document.getElementById("date").value = "";
-  })
-  .catch(err => alert("❌ Submission failed: " + err));
- }
-  </script>
 </body>
 </html>
