@@ -1,5 +1,5 @@
 // app.js
-const SHEET_API_URL = 'https://script.google.com/macros/s/YOUR_DEPLOYED_SCRIPT_ID/exec'; // Replace
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbzLPXzE7QZVeFrdWWwcyq1cJOzygB3rE881BLdIag_YQfjhJFwngjzRY9gPwJuWLg/exec'; // Replace
 let currentUser = "";
 let userCoords = "";
 
